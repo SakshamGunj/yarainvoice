@@ -123,8 +123,8 @@ def create_invoice_pdf(invoice_data: Dict[str, Any]) -> BytesIO:
     y_pos_right -= (qr_size + 0.2*inch)
     # === Static Company Info ===
     comp_x = LEFT_MARGIN; comp_width = 3 * inch
-    p = Paragraph("NORTH SIKKIM TOURS & TRAVELS PVT .LTD", style_h2); p.wrapOn(c, comp_width, 0.5*inch); p.drawOn(c, comp_x, y_pos_left); y_pos_left -= (p.height + 0.1*inch)
-    p = Paragraph("GSTIN : 11AHEPL3233F1Z0", style_normal); p.wrapOn(c, comp_width, 0.2*inch); p.drawOn(c, comp_x, y_pos_left); y_pos_left -= (p.height + 0.2*inch)
+    p = Paragraph("Yara Escape Tours & Trek", style_h2); p.wrapOn(c, comp_width, 0.5*inch); p.drawOn(c, comp_x, y_pos_left); y_pos_left -= (p.height + 0.1*inch)
+    p = Paragraph("Specialist in: Sikkim, Darjelling, Northeast", style_normal); p.wrapOn(c, comp_width, 0.2*inch); p.drawOn(c, comp_x, y_pos_left); y_pos_left -= (p.height + 0.2*inch)
     # === Dynamic Invoice To ===
     p = Paragraph("<u>INVOICE TO:</u>", ParagraphStyle(name='InvoiceTo', parent=style_bold, textColor=HEADER_RED)); p.wrapOn(c, comp_width, 0.2*inch); p.drawOn(c, comp_x, y_pos_left); y_pos_left -= (p.height + 0.1*inch)
     cust_info_dynamic = [(client_name, style_bold), (f"Phone: {client_phone}" if client_phone else "", style_normal), (f"Email: {client_email}" if client_email else "", style_normal)]
@@ -164,14 +164,14 @@ def create_invoice_pdf(invoice_data: Dict[str, Any]) -> BytesIO:
     # === Static Thank You & Contact ===
     contact_y = terms_y
     p = Paragraph("<b>THANK YOU FOR CHOOSING US!</b>", style_h2); p.wrapOn(c, terms_width, 0.2*inch); p.drawOn(c, terms_x, contact_y); contact_y -= (p.height + 0.2 * inch)
-    contact_info_static = [("Phone:", "+91 89440-30710"), ("Email:", "northsikkimtravelexpedetion@gmail.com"), ("Address:", "Shop No.17, Tse-Ka Commercial<br/>Complex<br/>Gangtok, Sikkim - 737101")]
+    contact_info_static = [("Phone:", "+91 8250133947 / +91 9883023091"), ("Website:", "www.yaraservice.com"), ("Address:", "Gangtok, Lumsey Sikkim - 737101")]
     for label, value in contact_info_static:
         line_start_y = contact_y; p_label = Paragraph(f"<b>{label}</b>", style_normal); label_width = 0.6 * inch; p_label.wrapOn(c, label_width, 0.5*inch); p_label.drawOn(c, terms_x, line_start_y - p_label.height)
         value_style = ParagraphStyle(name=f'ValueStatic_{label[:3]}', parent=style_normal, leftIndent=label_width + 0.1*inch); p_value = Paragraph(value, value_style); p_value.wrapOn(c, terms_width - (label_width + 0.1*inch), 0.6*inch); p_value.drawOn(c, terms_x , line_start_y - p_value.height); contact_y -= (max(p_label.height, p_value.height) + 0.1*inch)
     # === Bank Details ===
     bank_details_y = contact_y - 0.3*inch
     p_bank_heading = Paragraph("<b>Bank Details:</b>", style_h2); p_bank_heading.wrapOn(c, terms_width, 0.2*inch); p_bank_heading.drawOn(c, terms_x, bank_details_y); bank_details_y -= (p_bank_heading.height + 0.1 * inch)
-    bank_info = [("Acc no:", "9999399339"), ("IFSC code:", "wefhwbe"), ("Bank:", "Canara Bank"), ("Account Holder:", "Yara service")]
+    bank_info = [("Acc no:", "120033745630"), ("IFSC code:", "CNRB0003731"), ("Bank:", "Canara Bank"), ("Account Holder:", "Yara services")]
     for label, value in bank_info:
         p_label = Paragraph(f"<b>{label}</b>", style_normal); label_width = 1.0 * inch; p_label.wrapOn(c, label_width, 0.5*inch); p_label.drawOn(c, terms_x, bank_details_y)
         value_style = ParagraphStyle(name=f'BankValue_{label[:3]}', parent=style_normal, leftIndent=label_width + 0.05*inch); p_value = Paragraph(value, value_style); p_value.wrapOn(c, terms_width - (label_width + 0.05*inch), 0.6*inch); p_value.drawOn(c, terms_x , bank_details_y)

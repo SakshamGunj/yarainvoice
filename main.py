@@ -113,7 +113,7 @@ def create_invoice_pdf(invoice_data: Dict[str, Any]) -> BytesIO:
     y_pos_right -= line_height_inv
     c.drawRightString(right_column_start_x + right_column_width, y_pos_right, inv_date_str); c.drawString(right_column_start_x, y_pos_right, "Invoice Date:")
     y_pos_right -= (line_height_inv + 0.1*inch)
-    upi_text = "UPI ID - TOURISM.NORTHSIKKIM@CNRB"
+    upi_text = "UPI ID - 8250133947-mc1a@ibl"
     p_upi = Paragraph(upi_text, style_upi); p_upi.wrapOn(c, right_column_width, 0.2*inch); p_upi.drawOn(c, right_column_start_x, y_pos_right)
     y_pos_right -= (p_upi.height + 0.1*inch)
     qr_size = 1.6 * inch; qr_x = right_column_start_x + (right_column_width - qr_size) / 2; qr_y = y_pos_right - qr_size

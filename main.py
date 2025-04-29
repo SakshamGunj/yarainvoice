@@ -180,7 +180,7 @@ def create_invoice_pdf(invoice_data: Dict[str, Any]) -> BytesIO:
     # === Static Signature ===
     sig_base_y = min(summary_bottom_y, bank_details_bottom_y) - 0.2*inch; sig_width = 1.5 * inch; sig_x = PAGE_WIDTH - RIGHT_MARGIN - sig_width; sig_img_width = 1.0 * inch; sig_img_height = 0.5 * inch
     draw_logo(c, SIGNATURE_PATH, sig_x + (sig_width - sig_img_width) / 2 , sig_base_y, sig_img_width, sig_img_height); sig_text_y = sig_base_y - 0.1*inch
-    p = Paragraph("NORTH SIKKIM TOURS &<br/>TRAVELS PVT .LTD", style_center); p.wrapOn(c, sig_width, 0.4*inch); p.drawOn(c, sig_x, sig_text_y - p.height)
+    p = Paragraph("Yara Escapes Tours & Trek", style_center); p.wrapOn(c, sig_width, 0.4*inch); p.drawOn(c, sig_x, sig_text_y - p.height)
     # === Dynamic Footer ===
     footer_y = BOTTOM_MARGIN; c.setFillColor(HEADER_RED); c.line(LEFT_MARGIN, footer_y + 0.25*inch, PAGE_WIDTH - RIGHT_MARGIN, footer_y + 0.25*inch); c.setFillColor(colors.black)
     p_footer_left = Paragraph(f"INVOICE NO: {inv_no} | INVOICE DATE: {inv_date_str}", style_footer); p_footer_left.wrapOn(c, CONTENT_WIDTH / 2, 0.2*inch); p_footer_left.drawOn(c, LEFT_MARGIN, footer_y)

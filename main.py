@@ -92,7 +92,7 @@ def create_invoice_pdf(invoice_data: Dict[str, Any]) -> BytesIO:
     client_address_lines = invoice_data.get('client_address', '').split('\n') if invoice_data.get('client_address') else []
     items = invoice_data.get('items', [])
     discount_amount = invoice_data.get('discount', 0.0)
-    advance_payment = invoice_data.get('advance_payment', 0.0)
+    advance_payment = invoice_data.get('advance_payment', 0)
     gst_rate = invoice_data.get('gst_rate', 0.0)
     # --- PDF Drawing Logic (Keep entire drawing logic from previous final version) ---
     y_pos = PAGE_HEIGHT - TOP_MARGIN
@@ -205,7 +205,7 @@ class InvoiceRequestData(BaseModel):
     client_address: Optional[str] = Field(None, example="North Balurchar, Shashan Kali Rd,\nEnglish Bazar, Malda\nWest Bengal - 732101")
     items: List[InvoiceItem] = []
     discount: float = 0.0
-    advance_payment: float = Field(alias="advancePayment")
+    advance_payment: int = Field(alias="advancePayment")
     gst_rate: float = Field(default=0, alias="gstRate")
     class Config:
         populate_by_name = True
